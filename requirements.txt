@@ -1,0 +1,8 @@
+gradio==5.23.0
+transformers
+torch
+openai
+pandas
+numpy
+scikit-learn
+Pillow
