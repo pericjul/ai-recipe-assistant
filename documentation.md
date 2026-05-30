@@ -3,8 +3,8 @@
 ## Project Metadata
 
 - Project title: AI Recipe Assistant — Food Category Classification, Difficulty Prediction & Cooking Tips
-- Student: juliaper
-- GitHub repository URL: https://github.com/juliaper/ai-recipe-assistant
+- Student: Julia Peric
+- GitHub repository URL: https://github.com/pericjul/ai-recipe-assistant
 - Deployment URL: https://huggingface.co/spaces/juliaper/recipe-ai-assistant
 - Submission date: 07 June 2026
 
