@@ -2,7 +2,7 @@
 
 ## Project Metadata
 
-- Project title: AI Recipe Assistant — Food Category Classification, Difficulty Prediction & Cooking Tips
+- Project title: AI Recipe Assistant - Food Category Classification, Difficulty Prediction & Cooking Tips
 - Student: Julia Peric
 - GitHub repository URL: https://github.com/pericjul/ai-recipe-assistant
 - Deployment URL: https://huggingface.co/spaces/juliaper/recipe-ai-assistant
@@ -67,8 +67,8 @@ Food Photo → [CV: ViT] → Category
 
 | Entry | Source name or link | Type | Size | Role in this block |
 | --- | --- | --- | --- | --- |
-| 1 | [Epicurious Recipe Dataset](https://www.kaggle.com/datasets/pes12017000148/food-ingredients-and-recipe-dataset-with-images) | CSV | 13,501 recipes | Primary training data — recipe features for difficulty prediction |
-| 2 | [Food Nutrition Dataset](https://www.kaggle.com/datasets/utsavdey1410/food-nutrition-dataset) | CSV | 2,395 foods, 35 nutritional features | Second data source — nutrition features added to ML model |
+| 1 | [Epicurious Recipe Dataset](https://www.kaggle.com/datasets/pes12017000148/food-ingredients-and-recipe-dataset-with-images) | CSV | 13,501 recipes | Primary training data - recipe features for difficulty prediction |
+| 2 | [Food Nutrition Dataset](https://www.kaggle.com/datasets/utsavdey1410/food-nutrition-dataset) | CSV | 2,395 foods, 35 nutritional features | Second data source - nutrition features added to ML model |
 
 #### 2A.2 Preprocessing and Features
 
@@ -76,22 +76,22 @@ Food Photo → [CV: ViT] → Category
 
 #### EDA Key Findings
 
-**Data Source 1 — Epicurious Recipe Dataset (6,700 recipes after filtering):**
+**Data Source 1 - Epicurious Recipe Dataset (6,700 recipes after filtering):**
 
 ![EDA Overview](eda_overview.png)
 
 - **Category distribution:** Dessert is the largest category (1,974 recipes), Pasta the smallest (425). Categories are imbalanced but all have enough samples for training.
-- **Difficulty distribution:** Easy 46.8%, Medium 43.0%, Hard 10.2% — slight class imbalance, Hard recipes are rare.
+- **Difficulty distribution:** Easy 46.8%, Medium 43.0%, Hard 10.2% - slight class imbalance, Hard recipes are rare.
 - **Ingredient count:** Mean = 12.1, std = 4.7, range 1–51. Clear separation between Easy (mean ~8) and Hard (mean ~20+) recipes.
-- **Instruction length:** Mean = 202 words, right-skewed — most recipes are concise but some are very detailed (up to 2,587 words).
+- **Instruction length:** Mean = 202 words, right-skewed - most recipes are concise but some are very detailed (up to 2,587 words).
 
 ![EDA Features](eda_features.png)
 
-- **Feature correlation:** Strong positive correlation between ingredient count and instruction words — both increase with difficulty. Hard recipes cluster in top-right of scatter plot.
-- **Cooking techniques:** Simmer (1,847 recipes) and Whisk (1,203) are most common. Blanch and Deglaze are rare — these are good difficulty indicators.
-- **Data Source 2 — Nutrition Dataset:** Meat has highest protein (26.5g/100g) and calories (543 kcal/100g). Soup has lowest calories (73 kcal/100g). Salad has surprisingly high protein (7.1g) due to legumes.
+- **Feature correlation:** Strong positive correlation between ingredient count and instruction words - both increase with difficulty. Hard recipes cluster in top-right of scatter plot.
+- **Cooking techniques:** Simmer (1,847 recipes) and Whisk (1,203) are most common. Blanch and Deglaze are rare - these are good difficulty indicators.
+- **Data Source 2 - Nutrition Dataset:** Meat has highest protein (26.5g/100g) and calories (543 kcal/100g). Soup has lowest calories (73 kcal/100g). Salad has surprisingly high protein (7.1g) due to legumes.
 - Preprocessing steps: Parsed ingredient lists with `ast.literal_eval`. Counted instruction words and steps with regex. Extracted binary technique flags from instruction text.
-- Feature engineering: 26 features total — 21 from recipe data + 5 nutrition features from second data source (`nutr_caloric_value`, `nutr_protein`, `nutr_fat`, `nutr_carbohydrates`, `nutr_dietary_fiber`).
+- Feature engineering: 26 features total - 21 from recipe data + 5 nutrition features from second data source (`nutr_caloric_value`, `nutr_protein`, `nutr_fat`, `nutr_carbohydrates`, `nutr_dietary_fiber`).
 - Target: `difficulty` (Easy/Medium/Hard) assigned by rules based on ingredient count and instruction length.
 
 See [`app.py`, lines 40-75](app.py#L40-L75)
@@ -109,8 +109,8 @@ See [`app.py`, lines 40-75](app.py#L40-L75)
 
 #### 2A.5 Evaluation and Error Analysis
 - Metrics: 5-fold cross-validation accuracy
-- Final results: Gradient Boosting — Accuracy = 1.000
-- Error patterns: Logistic Regression underperforms (0.897) — relationship is non-linear. High accuracy because labels are rule-based from the same features.
+- Final results: Gradient Boosting - Accuracy = 1.000
+- Error patterns: Logistic Regression underperforms (0.897) - relationship is non-linear. High accuracy because labels are rule-based from the same features.
 
 #### 2A.6 Integration with Other Block(s)
 - Inputs: Food category from CV model (used to find matching recipe and nutrition lookup)
@@ -153,7 +153,7 @@ See [`app.py`, lines 40-75](app.py#L40-L75)
 
 #### 2B.6 Integration with Other Block(s)
 - Inputs: Category (CV), difficulty (ML), recipe text (Data Source 1), nutrition (Data Source 2)
-- Outputs: Natural language explanation — final output to user
+- Outputs: Natural language explanation - final output to user
 
 ---
 
@@ -211,14 +211,14 @@ Training results:
   3. Click "Analyze"
   4. View: category + confidence, difficulty + scores, nutrition info, LLM explanation, suggested recipe
 
-**Example 1 — Dessert (Strawberry Cake, Friendly Prompt)**
+**Example 1 - Dessert (Strawberry Cake, Friendly Prompt)**
 
 ![Dessert top](screenshot_dessert_top.png)
 ![Dessert bottom](screenshot_dessert_bottom.png)
 
 Category: Dessert (44%) | Difficulty: Medium | Recipe: Walnut and Almond Cake with Orange-Pomegranate Compote
 
-**Example 2 — Pasta (Lasagna, Professional Prompt)**
+**Example 2 - Pasta (Lasagna, Professional Prompt)**
 
 ![Pasta top](screenshot_pasta_top.png)
 ![Pasta bottom](screenshot_pasta_bottom.png)
@@ -259,12 +259,12 @@ python app.py
 
 ## 5. Optional Bonus Evidence
 
-- [x] Third selected block implemented with strong quality — NLP with 2 prompt styles compared (Friendly vs Professional, different temperatures)
-- [x] More than two data sources used with clear added value — Epicurious (13,501 recipes) + Food Nutrition Dataset (2,395 foods, 35 features) — used in both ML model and app UI
-- [x] A core section is done exceptionally well — All 3 blocks meaningfully integrated: CV output → ML → NLP, single pipeline
-- [x] Extended evaluation — CV training curve per epoch documented, prompt comparison qualitatively evaluated, ML iteration table with metrics
+- [x] Third selected block implemented with strong quality - NLP with 2 prompt styles compared (Friendly vs Professional, different temperatures)
+- [x] More than two data sources used with clear added value - Epicurious (13,501 recipes) + Food Nutrition Dataset (2,395 foods, 35 features) - used in both ML model and app UI
+- [x] A core section is done exceptionally well - All 3 blocks meaningfully integrated: CV output → ML → NLP, single pipeline
+- [x] Extended evaluation - CV training curve per epoch documented, prompt comparison qualitatively evaluated, ML iteration table with metrics
 
 Evidence:
 - NLP: Two system prompts with different tones, temperatures and output formats. User can switch between them live in the app.
-- Second data source: Nutrition features from Food Nutrition Dataset added as 5 ML features AND displayed to user — clear added value at both model and UI level.
+- Second data source: Nutrition features from Food Nutrition Dataset added as 5 ML features AND displayed to user - clear added value at both model and UI level.
 - Integration: CV output drives recipe lookup and ML prediction. ML output feeds NLP. All 3 blocks share data through one unified pipeline in [`app.py`](app.py).
